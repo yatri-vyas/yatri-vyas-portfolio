@@ -5,19 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Yatri — Full Stack Developer</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+<script src="https://unpkg.com/lucide@latest"></script>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg: #0b0c10;
-    --bg2: #111318;
-    --bg3: #1a1c24;
-    --accent: #7fff6e;
-    --accent2: #4dffb4;
-    --text: #f0f0ec;
-    --muted: #7a7d8a;
-    --border: rgba(255,255,255,0.08);
-    --card-bg: #14161f;
+    --bg: #fbfcff;
+    --bg2: #f1f5f9;
+    --bg3: #e8eef7;
+    --accent: #2563eb;
+    --accent2: #06b6d4;
+    --text: #172033;
+    --muted: #617087;
+    --border: #dce4ef;
+    --card-bg: #ffffff;
   }
 
   html { scroll-behavior: smooth; }
@@ -35,7 +36,7 @@
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     display: flex; align-items: center; justify-content: space-between;
     padding: 1.2rem 4rem;
-    background: rgba(11,12,16,0.85);
+    background: rgba(251,252,255,0.88);
     backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--border);
   }
@@ -55,8 +56,23 @@
     font-weight: 400;
     letter-spacing: 0.02em;
     transition: color 0.2s;
+    position: relative;
   }
-  .nav-links a:hover { color: var(--text); }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: -0.45rem;
+    height: 2px;
+    background: var(--accent);
+    border-radius: 99px;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.2s ease;
+  }
+  .nav-links a:hover,
+  .nav-links a.active { color: var(--accent); }
+  .nav-links a:hover::after,
+  .nav-links a.active::after { transform: scaleX(1); }
 
   .hero {
     min-height: 100vh;
@@ -69,14 +85,14 @@
     content: '';
     position: absolute; top: -200px; right: -200px;
     width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(127,255,110,0.07) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(37,99,235,0.11) 0%, transparent 70%);
     pointer-events: none;
   }
   .hero::after {
     content: '';
     position: absolute; bottom: -150px; left: -100px;
     width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(77,255,180,0.05) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(6,182,212,0.09) 0%, transparent 70%);
     pointer-events: none;
   }
   .hero-inner {
@@ -85,8 +101,8 @@
   }
   .hero-tag {
     display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(127,255,110,0.08);
-    border: 1px solid rgba(127,255,110,0.2);
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
     border-radius: 100px;
     padding: 0.35rem 1rem;
     font-size: 0.8rem;
@@ -115,7 +131,7 @@
   .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
   .btn-primary {
     background: var(--accent);
-    color: #0b0c10;
+    color: #ffffff;
     border: none;
     padding: 0.8rem 1.8rem;
     border-radius: 8px;
@@ -126,7 +142,7 @@
     transition: transform 0.2s, box-shadow 0.2s;
     font-family: 'DM Sans', sans-serif;
   }
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(127,255,110,0.25); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,99,235,0.25); }
   .btn-secondary {
     background: transparent;
     color: var(--text);
@@ -139,7 +155,7 @@
     transition: border-color 0.2s, background 0.2s;
     font-family: 'DM Sans', sans-serif;
   }
-  .btn-secondary:hover { border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.03); }
+  .btn-secondary:hover { border-color: #93c5fd; background: #eff6ff; }
 
   .hero-visual {
     display: flex; justify-content: flex-end; align-items: center;
@@ -167,7 +183,7 @@
     font-family: 'Syne', sans-serif;
     font-size: 2rem;
     font-weight: 800;
-    color: #0b0c10;
+    color: #ffffff;
     margin: 0 auto 1.2rem;
   }
   .profile-card h3 {
@@ -240,15 +256,16 @@
     padding: 1.5rem;
     transition: border-color 0.2s, transform 0.2s;
   }
-  .skill-card:hover { border-color: rgba(127,255,110,0.2); transform: translateY(-3px); }
+  .skill-card:hover { border-color: #93c5fd; transform: translateY(-3px); box-shadow: 0 12px 28px rgba(37,99,235,0.09); }
   .skill-icon {
     width: 40px; height: 40px;
-    background: rgba(127,255,110,0.1);
+    background: #eff6ff;
     border-radius: 10px;
     display: flex; align-items: center; justify-content: center;
-    font-size: 1.3rem;
+    color: var(--accent);
     margin-bottom: 1rem;
   }
+  .skill-icon svg { width: 20px; height: 20px; stroke-width: 2; }
   .skill-card h4 {
     font-family: 'Syne', sans-serif;
     font-weight: 600;
@@ -278,16 +295,14 @@
     transition: border-color 0.2s, transform 0.2s;
     display: flex; flex-direction: column;
   }
-  .project-card:hover { border-color: rgba(127,255,110,0.25); transform: translateY(-4px); }
+  .project-card:hover { border-color: #93c5fd; transform: translateY(-4px); box-shadow: 0 16px 30px rgba(37,99,235,0.10); }
   .project-thumb {
     height: 160px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 3rem;
     position: relative;
     overflow: hidden;
   }
-  .project-thumb.green { background: linear-gradient(135deg, rgba(127,255,110,0.1), rgba(77,255,180,0.07)); }
-  .project-thumb.blue  { background: linear-gradient(135deg, rgba(56,139,253,0.12), rgba(77,255,180,0.06)); }
+  .project-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.35s ease; }
+  .project-card:hover .project-thumb img { transform: scale(1.06); }
   .project-body { padding: 1.4rem; flex: 1; display: flex; flex-direction: column; }
   .project-body h4 {
     font-family: 'Syne', sans-serif;
@@ -327,14 +342,14 @@
     padding: 1.5rem 1.8rem;
     transition: border-color 0.2s;
   }
-  .timeline-item:hover { border-color: rgba(127,255,110,0.4); }
+  .timeline-item:hover { border-color: #93c5fd; }
   .tl-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem; }
   .tl-top h4 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; }
   .tl-date {
     font-size: 0.78rem;
     color: var(--accent);
-    background: rgba(127,255,110,0.08);
-    border: 1px solid rgba(127,255,110,0.15);
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
     padding: 0.2rem 0.7rem;
     border-radius: 100px;
   }
@@ -357,8 +372,20 @@
     border-radius: 10px;
     transition: border-color 0.2s;
   }
-  .contact-link:hover { border-color: rgba(127,255,110,0.3); color: var(--accent); }
-  .contact-link .icon { font-size: 1.2rem; }
+  .contact-link:hover { border-color: #93c5fd; color: var(--accent); background: #f8fbff; }
+  .contact-link .icon { width: 1.2rem; color: var(--accent); }
+  .skill-icon svg, .contact-link svg { width: 20px; height: 20px; stroke-width: 2; }
+
+  /* Project detail modal keeps the same light visual language. */
+  #modal-overlay { background: rgba(23, 32, 51, 0.35) !important; }
+  #modal-box { background: var(--card-bg) !important; border-color: var(--border) !important; box-shadow: 0 24px 60px rgba(23, 32, 51, 0.18); }
+  #modal-box h3 { color: var(--text); }
+  #modal-box p, #modal-box li { color: var(--muted) !important; }
+  #modal-box ul { border-color: var(--border) !important; }
+  #modal-box li { border-color: var(--border) !important; }
+  #modal-box button { color: var(--text) !important; border-color: var(--border) !important; background: var(--bg2) !important; }
+  #modal-box div[style*="background:#1a1c24"] { background: var(--bg2) !important; }
+  #modal-box span[style*="background:#1a1c24"] { background: var(--bg3) !important; border-color: var(--border) !important; color: var(--muted) !important; }
 
   .contact-form { display: flex; flex-direction: column; gap: 1rem; }
   .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
@@ -476,7 +503,7 @@
     <p class="section-sub">A blend of frontend, backend, and CMS skills built through coursework and real projects.</p>
     <div class="skills-grid">
       <div class="skill-card">
-        <div class="skill-icon">⚛️</div>
+        <div class="skill-icon"><i data-lucide="layout-template" aria-hidden="true"></i></div>
         <h4>Frontend Development</h4>
         <p style="color: var(--muted); font-size: 0.88rem;">Building modern UIs with React and Vite, responsive layouts with HTML & CSS.</p>
         <div class="skill-tags">
@@ -489,7 +516,7 @@
         </div>
       </div>
       <div class="skill-card">
-        <div class="skill-icon">🟢</div>
+        <div class="skill-icon"><i data-lucide="server" aria-hidden="true"></i></div>
         <h4>Backend Development</h4>
         <p style="color: var(--muted); font-size: 0.88rem;">REST APIs with Node.js and Express, JWT authentication, and MongoDB.</p>
         <div class="skill-tags">
@@ -500,7 +527,7 @@
         </div>
       </div>
       <div class="skill-card">
-        <div class="skill-icon">🖥️</div>
+        <div class="skill-icon"><i data-lucide="database" aria-hidden="true"></i></div>
         <h4>PHP & MySQL</h4>
         <p style="color: var(--muted); font-size: 0.88rem;">Server-side logic with PHP and MySQL, building data-driven web applications.</p>
         <div class="skill-tags">
@@ -510,7 +537,7 @@
         </div>
       </div>
       <div class="skill-card">
-        <div class="skill-icon">🔧</div>
+        <div class="skill-icon"><i data-lucide="settings-2" aria-hidden="true"></i></div>
         <h4>WordPress & CMS</h4>
         <p style="color: var(--muted); font-size: 0.88rem;">Theme customization and page building, from internship experience.</p>
         <div class="skill-tags">
@@ -519,7 +546,7 @@
         </div>
       </div>
       <div class="skill-card">
-        <div class="skill-icon">🛠️</div>
+        <div class="skill-icon"><i data-lucide="wrench" aria-hidden="true"></i></div>
         <h4>Tools & Workflow</h4>
         <p style="color: var(--muted); font-size: 0.88rem;">Version control, API testing, and standard dev tools used day-to-day.</p>
         <div class="skill-tags">
@@ -548,7 +575,7 @@
     <div class="projects-grid">
 
       <div class="project-card">
-        <div class="project-thumb green">📝</div>
+        <div class="project-thumb"><img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=900&q=80" alt="Laptop displaying a blog project"></div>
         <div class="project-body">
           <h4>Blog App</h4>
           <p>A full-stack blog platform with a React + Vite frontend and a custom Express.js REST API, deployed on Vercel and Render.</p>
@@ -563,7 +590,7 @@
       </div>
 
       <div class="project-card">
-        <div class="project-thumb blue">🗂️</div>
+        <div class="project-thumb"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80" alt="Analytics dashboard for an employee management project"></div>
         <div class="project-body">
           <h4>Employee Management System</h4>
           <p>A Node.js/Express/MongoDB REST API with employee CRUD, search, sorting and pagination, JWT auth and email OTP verification — thoroughly tested in Postman, with a basic React frontend to demonstrate it.</p>
@@ -578,7 +605,7 @@
       </div>
 
       <div class="project-card">
-        <div class="project-thumb green">🧹</div>
+        <div class="project-thumb"><img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=900&q=80" alt="Cleaning service supplies for Dusty Go Sparkle"></div>
         <div class="project-body">
           <h4>Dusty Go Sparkle</h4>
           <p>A PHP/MySQL home cleaning service booking app handling service scheduling and customer data — presented as my BCA final year project.</p>
@@ -653,11 +680,16 @@ const projects = {
 
 function openModal(key) {
   const p = projects[key];
+  const projectImages = {
+    blog: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=240&q=80',
+    employee: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=240&q=80',
+    dusty: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=240&q=80'
+  };
   const colorMap = { green: '#7fff6e', blue: '#4dffb4' };
   const accent = colorMap[p.color] || '#7fff6e';
 
   const featuresHtml = p.features.map(f =>
-    `<li style="padding:0.45rem 0; border-bottom:1px solid rgba(255,255,255,0.05); font-size:0.9rem; color:#c8c8c4;">${f}</li>`
+    `<li style="padding:0.45rem 0; border-bottom:1px solid rgba(255,255,255,0.05); font-size:0.9rem; color:#c8c8c4;">${f.replace(/^[^A-Za-z0-9]+\s*/u, '')}</li>`
   ).join('');
 
   const techHtml = p.tech.map(t =>
@@ -666,7 +698,7 @@ function openModal(key) {
 
   document.getElementById('modal-content').innerHTML = `
     <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1.5rem;">
-      <div style="width:52px; height:52px; border-radius:14px; background:rgba(127,255,110,0.1); display:flex; align-items:center; justify-content:center; font-size:1.6rem; flex-shrink:0;">${p.emoji}</div>
+      <img src="${projectImages[key]}" alt="${p.title} preview" style="width:52px; height:52px; border-radius:14px; object-fit:cover; flex-shrink:0;">
       <div>
         <div style="font-size:0.72rem; text-transform:uppercase; letter-spacing:0.12em; color:${accent}; margin-bottom:0.2rem;">${p.type}</div>
         <h3 style="font-family:'Syne',sans-serif; font-size:1.5rem; font-weight:700; letter-spacing:-0.02em;">${p.title}</h3>
@@ -693,13 +725,14 @@ function openModal(key) {
     </div>
 
     <div style="display:flex; gap:0.8rem; flex-wrap:wrap;">
-      <a href="${p.github}" target="_blank" style="display:inline-flex; align-items:center; gap:6px; background:${accent}; color:#0b0c10; padding:0.7rem 1.4rem; border-radius:8px; font-size:0.88rem; font-weight:600; text-decoration:none; font-family:'DM Sans',sans-serif;">🐙 View on GitHub</a>
-      ${p.live ? `<a href="${p.live}" target="_blank" style="display:inline-flex; align-items:center; gap:6px; background:transparent; color:${accent}; border:1px solid ${accent}; padding:0.7rem 1.4rem; border-radius:8px; font-size:0.88rem; font-weight:600; text-decoration:none; font-family:'DM Sans',sans-serif;">🌐 View Live</a>` : ''}
+      <a href="${p.github}" target="_blank" style="display:inline-flex; align-items:center; gap:6px; background:${accent}; color:#fff; padding:0.7rem 1.4rem; border-radius:8px; font-size:0.88rem; font-weight:600; text-decoration:none; font-family:'DM Sans',sans-serif;"><i data-lucide="github" style="width:16px; height:16px;"></i> View on GitHub</a>
+      ${p.live ? `<a href="${p.live}" target="_blank" style="display:inline-flex; align-items:center; gap:6px; background:transparent; color:${accent}; border:1px solid ${accent}; padding:0.7rem 1.4rem; border-radius:8px; font-size:0.88rem; font-weight:600; text-decoration:none; font-family:'DM Sans',sans-serif;"><i data-lucide="external-link" style="width:16px; height:16px;"></i> View Live</a>` : ''}
       <button onclick="closeModal()" style="display:inline-flex; align-items:center; gap:6px; background:transparent; color:#f0f0ec; border:1px solid rgba(255,255,255,0.12); padding:0.7rem 1.4rem; border-radius:8px; font-size:0.88rem; cursor:pointer; font-family:'DM Sans',sans-serif;">Close</button>
     </div>
   `;
 
   const overlay = document.getElementById('modal-overlay');
+  lucide.createIcons({ attrs: { 'stroke-width': 2 } });
   overlay.style.display = 'flex';
   document.body.style.overflow = 'hidden';
 }
@@ -765,16 +798,16 @@ document.addEventListener('keydown', function(e) {
         <p>I'm actively looking for full stack developer roles and freelance opportunities. Feel free to reach out — I'd love to connect!</p>
         <div class="contact-links">
           <a href="mailto:yatrivvyas@gmail.com" class="contact-link">
-            <span class="icon">📧</span> yatrivvyas@gmail.com
+            <i class="icon" data-lucide="mail" aria-hidden="true"></i> yatrivvyas@gmail.com
           </a>
           <a href="https://github.com/yatri-vyas" class="contact-link" target="_blank">
-            <span class="icon">🐙</span> github.com/yatri-vyas
+            <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.23c0 4.52 2.87 8.35 6.84 9.7.5.1.68-.22.68-.49 0-.24-.01-1.04-.01-1.88-2.78.62-3.37-1.2-3.37-1.2-.45-1.19-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .08 1.53 1.06 1.53 1.06.9 1.57 2.35 1.12 2.92.86.09-.67.35-1.12.64-1.38-2.22-.26-4.56-1.15-4.56-5.1 0-1.13.39-2.05 1.03-2.78-.1-.26-.45-1.32.1-2.75 0 0 .84-.28 2.75 1.06A9.28 9.28 0 0 1 12 6.8c.85 0 1.7.12 2.5.34 1.9-1.34 2.74-1.06 2.74-1.06.55 1.43.2 2.49.1 2.75.64.73 1.03 1.65 1.03 2.78 0 3.96-2.35 4.83-4.58 5.08.36.33.68.96.68 1.94 0 1.4-.01 2.53-.01 2.87 0 .27.18.6.69.49A10.24 10.24 0 0 0 22 12.23C22 6.58 17.52 2 12 2Z"/></svg> github.com/yatri-vyas
           </a>
           <a href="https://www.linkedin.com/in/yatree-vyas-8685b3297/" class="contact-link" target="_blank">
-            <span class="icon">💼</span> LinkedIn Profile
+            <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 3H3.55C2.7 3 2 3.7 2 4.55v16.9C2 22.3 2.7 23 3.55 23h16.9c.85 0 1.55-.7 1.55-1.55V4.55C22 3.7 21.3 3 20.45 3ZM8.04 19H5V9.22h3.04V19ZM6.52 7.89a1.76 1.76 0 1 1 0-3.52 1.76 1.76 0 0 1 0 3.52ZM19 19h-3.03v-4.76c0-1.14-.02-2.6-1.58-2.6-1.59 0-1.84 1.24-1.84 2.52V19H9.52V9.22h2.91v1.34h.04c.4-.77 1.4-1.58 2.87-1.58 3.07 0 3.64 2.02 3.64 4.65V19Z"/></svg> LinkedIn Profile
           </a>
           <a href="#" class="contact-link">
-            <span class="icon">📍</span> Navsari, Gujarat, India
+            <i class="icon" data-lucide="map-pin" aria-hidden="true"></i> Navsari, Gujarat, India
           </a>
         </div>
       </div>
@@ -802,5 +835,44 @@ document.addEventListener('keydown', function(e) {
   <div class="footer-badge">Built with <span>♥</span> &nbsp;· Navsari, Gujarat</div>
 </footer>
 
+<script>
+  /* Replace decorative emoji with consistent line icons and project photography. */
+  document.addEventListener('DOMContentLoaded', function () {
+    const skillIcons = ['layout-template', 'server', 'database', 'settings-2', 'wrench'];
+    document.querySelectorAll('.skill-icon').forEach(function (element, index) {
+      element.innerHTML = '<i data-lucide="' + skillIcons[index] + '" aria-hidden="true"></i>';
+    });
+
+    const projectImages = [
+      ['https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=900&q=80', 'Laptop displaying a blog project'],
+      ['https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80', 'Analytics dashboard for an employee management project'],
+      ['https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=900&q=80', 'Cleaning service supplies for Dusty Go Sparkle']
+    ];
+    document.querySelectorAll('.project-thumb').forEach(function (element, index) {
+      const image = projectImages[index];
+      element.innerHTML = '<img src="' + image[0] + '" alt="' + image[1] + '">';
+    });
+
+    const navLinks = Array.from(document.querySelectorAll('.nav-links a'));
+    const sectionLinks = navLinks.map(function (link) {
+      return { link: link, section: document.querySelector(link.getAttribute('href')) };
+    }).filter(function (item) { return item.section; });
+
+    const sectionObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        sectionLinks.forEach(function (item) {
+          const isCurrent = item.section === entry.target;
+          item.link.classList.toggle('active', isCurrent);
+          if (isCurrent) item.link.setAttribute('aria-current', 'page');
+          else item.link.removeAttribute('aria-current');
+        });
+      });
+    }, { rootMargin: '-35% 0px -55% 0px', threshold: 0 });
+
+    sectionLinks.forEach(function (item) { sectionObserver.observe(item.section); });
+    lucide.createIcons();
+  });
+</script>
 </body>
 </html>
